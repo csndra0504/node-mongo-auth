@@ -34,7 +34,7 @@ router.post('/', (req, res, next) => {
       if (error) {
         return next(error);
       } else {
-        // req.session.userId = user._id;
+        res.send("user created!");
         console.log('success!');
       }
     });
