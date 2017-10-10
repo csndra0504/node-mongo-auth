@@ -34,8 +34,8 @@ router.post('/', (req, res, next) => {
       if (error) {
         return next(error);
       } else {
-        req.session.userId = user._id;
-        console.log('success!', user._id);
+        // req.session.userId = user._id;
+        console.log('success!');
       }
     });
 
