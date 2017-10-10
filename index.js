@@ -9,6 +9,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// serve static files from template
+app.use(express.static(__dirname + '/static'));
+
 // mount routes middleware to '/' path
 app.use('/', routes);
 
