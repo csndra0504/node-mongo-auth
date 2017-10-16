@@ -1,7 +1,14 @@
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'development') {
+  // Loads environment settings from '.env' into process.env
+  // This is for local development
+  require('dotenv').config();
+}
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import routes from './routes/router';
+var session = require('express-session');
 
 const app = express();
 
@@ -11,6 +18,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // serve static files from template
 app.use(express.static(__dirname + '/static'));
+
+//use sessions for tracking logins
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: false
+}));
 
 // mount routes middleware to '/' path
 app.use('/', routes);

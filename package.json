@@ -7,13 +7,14 @@
   "license": "MIT",
   "scripts": {
     "babel-node": "babel-node --presets=es2015,stage-2",
-    "start": "nodemon --exec npm run babel-node -- ./index.js && mongod"
+    "start": "NODE_ENV=development nodemon --exec npm run babel-node -- ./index.js && mongod"
   },
   "dependencies": {
     "babel-preset-stage-2": "^6.24.1",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "connect-mongo": "^2.0.0",
+    "dotenv": "^4.0.0",
     "express": "^4.16.1",
     "express-session": "^1.15.6",
     "mongoose": "^4.12.1",
