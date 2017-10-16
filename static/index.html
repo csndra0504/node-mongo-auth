@@ -3,13 +3,17 @@
     <head>
         <title>Basic Auth Server Example</title>
     </head>
-    <body>
+    <body style="text-align:center">
         <h1>Basic Auth Server Example</h1>
         <form action="/" method="post">
-            <input type="text" name="email" placeholder="Email"/>
-            <input type="text" name="username" placeholder="Username"/>
-            <input type="password" name="password"/>
-            <input type="password" name="passwordConf"/>
+            <label for="email">Email</label><br>
+            <input type="text" name="email" id="email"  placeholder="Email"/><br>
+            <label for="username">Username</label><br>
+            <input type="text" name="username" id="username" placeholder="Username"/><br>
+            <label for="password">Password</label><br>
+            <input type="password" id="password" name="password"/><br>
+            <label for="passwordConf">Confirm Password</label><br>
+            <input type="password" name="passwordConf" id="passwordConf"/><br>
             <input type="submit" value="REGISTER">
         </form>
     </body>
