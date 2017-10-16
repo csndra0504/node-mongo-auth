@@ -6,4 +6,8 @@ Practice project based on https://medium.com/of-all-things-tech-progress/startin
 Requires Nodejs.
 
 1. Install dependencies: `yarn`
-2. Run server `npm start`
+2. Create `.env` file with contents:
+```
+SESSION_SECRET="[RANDOM STRING HERE]"
+```
+3. Run server `npm start`
