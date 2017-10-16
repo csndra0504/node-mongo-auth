@@ -7,6 +7,10 @@ router.get('/', (req, res) => {
   res.send('Hello World');
 });
 
+router.get('/profile', function (req, res, next) {
+  return res.send('GET profile');
+});
+
 router.post('/', (req, res, next) => {
   // confirm that user typed same password twice
   if (req.body.password !== req.body.passwordConf) {
@@ -33,8 +37,7 @@ router.post('/', (req, res, next) => {
       if (error) {
         return next(error);
       } else {
-        res.send("user created!");
-        console.log('success!');
+        return res.redirect('/profile');
       }
     });
 
@@ -44,6 +47,10 @@ router.post('/', (req, res, next) => {
     return next(err);
   }
 
+});
+
+router.post('/profile', function (req, res, next) {
+  return res.send('POST profile');
 });
 
 module.exports = router;
