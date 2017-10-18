@@ -10,6 +10,7 @@ import mongoose from 'mongoose';
 import routes from './routes/router';
 import ConnectMongo from 'connect-mongo';
 import session from 'express-session';
+import logger from 'morgan';
 const MongoStore = ConnectMongo(session);
 const app = express();
 
@@ -20,6 +21,9 @@ const db = mongoose.connection;
 // middleware to parse incoming requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// middleware to parse incoming requests
+app.use(logger('dev'));
 
 // serve static files from template
 app.use(express.static(__dirname + '/static'));
