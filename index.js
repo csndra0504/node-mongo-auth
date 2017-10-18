@@ -51,11 +51,20 @@ app.all('/*', function(req, res, next) {
   }
 });
 
+// Auth Middleware - This will check if the token is valid
+// Only the requests that start with /api/v1/* will be checked for the token.
+// Any URL's that do not follow the below pattern should be avoided unless you
+// are sure that authentication is not needed
+// app.all('/api/v1/*', [require('./middlewares/validateRequest')]);
+
 // mount routes middleware to '/' path
 app.use('/', routes);
 
-app.listen(3000, function () {
-  console.log('Listening on port 3000!')
+// Start the server
+app.set('port', process.env.PORT || 3000);
+
+let server = app.listen(app.get('port'), function () {
+  console.log('Express server listening on port ' + server.address().port);
 });
 
 
