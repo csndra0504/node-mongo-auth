@@ -8,7 +8,20 @@ router.get('/', (req, res) => {
 });
 
 router.get('/profile', function (req, res, next) {
-  return res.send('GET profile');
+  User.findById(req.session.userId)
+    .exec(function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        if (user === null) {
+          let err = new Error('Not authorized! Go back!');
+          err.status = 400;
+          return next(err);
+        } else {
+          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+        }
+      }
+    });
 });
 
 router.post('/', (req, res, next) => {
@@ -37,6 +50,7 @@ router.post('/', (req, res, next) => {
       if (error) {
         return next(error);
       } else {
+        req.session.userId = user._id;
         return res.redirect('/profile');
       }
     });

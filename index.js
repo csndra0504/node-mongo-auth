@@ -8,9 +8,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import routes from './routes/router';
-var session = require('express-session');
-
+import ConnectMongo from 'connect-mongo';
+import session from 'express-session';
+const MongoStore = ConnectMongo(session);
 const app = express();
+
+//connect to MongoDB
+mongoose.connect('mongodb://localhost/testForAuth');
+const db = mongoose.connection;
 
 // middleware to parse incoming requests
 app.use(bodyParser.json());
@@ -23,7 +28,10 @@ app.use(express.static(__dirname + '/static'));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: db
+  })
 }));
 
 // mount routes middleware to '/' path
@@ -33,9 +41,7 @@ app.listen(3000, function () {
   console.log('Listening on port 3000!')
 });
 
-//connect to MongoDB
-mongoose.connect('mongodb://localhost/testForAuth');
-const db = mongoose.connection;
+
 
 //handle mongo error
 db.on('error', console.error.bind(console, 'connection error:'));
